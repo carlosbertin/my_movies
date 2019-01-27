@@ -25,7 +25,7 @@ actors = [
     {name: 'Harold Meers', gender: 'male'},
     {name: 'Silvia Petler', gender: 'female'},
     {name: 'Robbie Williams', gender: 'female'},
-    {name: 'David Hornet', gender: 'male'},
+    {name: 'David Hornet', gender: 'male'}
 ]
 
 directors = [

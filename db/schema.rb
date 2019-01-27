@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_27_014334) do
+ActiveRecord::Schema.define(version: 2019_01_27_032456) do
+
+  create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -18,6 +25,8 @@ ActiveRecord::Schema.define(version: 2019_01_27_014334) do
     t.datetime "release_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "budget"
+    t.string "box_office"
   end
 
   create_table "professionals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
