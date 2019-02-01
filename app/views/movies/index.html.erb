@@ -2,13 +2,19 @@
 
 <table border='1'>
     <tr>
+        <td colspan='4'><%= link_to 'Cadastrar', '/movie/new' %></td>
+    </tr>
+    <tr>
         <th>Title</th>
         <th>Release</th>
+        <th colspan='2'>Actions</th>
     </tr>
     <% @movies.each do |movie| %>
         <tr>
-            <td><%= link_to(movie.title, "/movies/#{movie.id}") %></td>
+            <td><%= link_to(movie.title, "/movie/#{movie.id}") %></td>
             <td><%= movie.release_date %></td>
+            <td><%= link_to 'Edit', "/movie/#{movie.id}/edit" %></td>
+            <td><%= link_to 'Destroy', "/movie/#{movie.id}/destroy", method: :delete , data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
 </table>
