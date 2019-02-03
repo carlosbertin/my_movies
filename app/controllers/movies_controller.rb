@@ -15,7 +15,8 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to action: :show, id: @movie.id
+      # redirect_to @movie
+      redirect_to action: :index
     else
       render :new
     end
@@ -25,11 +26,10 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie.update(movie_params)
-    if @movie.save
-      redirect_to action: :show, id: @movie.id
+    if @movie.update(movie_params)
+      redirect_to action: :index
     else
-      render :edit, id: @movie.id
+      render :edit
     end
   end
 
@@ -40,14 +40,13 @@ class MoviesController < ApplicationController
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
+
   def movie_params
     params.require(:movie).permit(:title, :release_date, :description)
   end
 
-  def set_movie
-    id = params['id']
-    @movie = Movie.find(id)
-  rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: 404
-  end
 end

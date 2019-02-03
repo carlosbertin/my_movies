@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_27_032456) do
+ActiveRecord::Schema.define(version: 2019_02_03_022643) do
+
+  create_table "actors_movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "actor_id"
+  end
 
   create_table "awards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -27,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_032456) do
     t.datetime "updated_at", null: false
     t.string "budget"
     t.string "box_office"
+    t.integer "director_id"
   end
 
   create_table "professionals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
