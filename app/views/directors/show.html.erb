@@ -25,5 +25,20 @@
   <%= @director.type %>
 </p>
 
+<p>
+  <strong>Filmes que este diretor já trabalhou:</strong>
+  <table border='1'>
+    <tr>
+        <th>Title</th>
+    </tr>
+    <% @movies_director.each do |movies_director| %>
+        <tr>
+            <td><%= movies_director.title %></td>
+        </tr>
+    <% end %>
+  </table>
+</p>
+        
+
 <%= link_to 'Edit', edit_director_path(@director) %> |
 <%= link_to 'Back', directors_path %>

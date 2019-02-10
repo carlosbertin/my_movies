@@ -10,6 +10,7 @@ class DirectorsController < ApplicationController
   # GET /directors/1
   # GET /directors/1.json
   def show
+    @movies_director = Movie.where(id: @director.id)
   end
 
   # GET /directors/new

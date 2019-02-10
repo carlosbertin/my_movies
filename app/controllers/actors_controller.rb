@@ -10,6 +10,9 @@ class ActorsController < ApplicationController
   # GET /actors/1
   # GET /actors/1.json
   def show
+    movies = Movie.all
+    actor = Actor.find(@actor.id)
+    @movies_actor = actor.movies
   end
 
   # GET /actors/new

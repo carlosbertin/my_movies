@@ -25,5 +25,19 @@
   <%= @actor.type %>
 </p>
 
+<p>
+  <strong>Filmes que este ator já trabalhou:</strong>
+  <table border='1'>
+    <tr>
+        <th>Title</th>
+    </tr>
+    <% @movies_actor.each do |movies_actor| %>
+        <tr>
+            <td><%= movies_actor.title %></td>
+        </tr>
+    <% end %>
+  </table>
+</p>
+
 <%= link_to 'Edit', edit_actor_path(@actor) %> |
 <%= link_to 'Back', actors_path %>

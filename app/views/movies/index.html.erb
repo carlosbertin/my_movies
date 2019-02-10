@@ -2,12 +2,14 @@
 
 <table border='1'>
     <tr>
-        <td colspan='6'><%= link_to 'Cadastrar', new_movie_path %></td>
+        <td colspan='7'><%= link_to 'Cadastrar', new_movie_path %></td>
     </tr>
     <tr>
         <th>Title</th>
         <th>Release</th>
         <th>Description</th>
+        <th>Director</th>
+        <th>Actor</th>
         <th colspan='4'>Actions</th>
     </tr>
     <% @movies.each do |movie| %>
@@ -15,6 +17,40 @@
             <td><%= movie.title %></td>
             <td><%= movie.release_date %></td>
             <td><%= movie.description %></td>
+            <%
+            if movie.director_id != nil
+                director_of_movie = Director.find(movie.director_id)
+            %>
+                <td><%= link_to director_of_movie.name, director_path(director_of_movie.id) %></td>
+            <%
+            else
+            %>
+                <td></td>
+            <%
+            end
+            unless movie.actors.empty?
+                movie_actors = movie.actors
+                ids_atores = movie_actors.ids
+            %>
+                <td>
+            <%
+                ids_atores.each do |id_atores|
+                    nome_ator = Actor.find(id_atores).name
+                    id_ator = Actor.find(id_atores).id
+            %>
+                <%= link_to nome_ator, actor_path(id_ator) %>
+            <%
+                end
+            %>
+                </td>
+            <%
+            else
+            %>
+                <td></td>
+            <%
+            end
+            %>
+            
             <td><%= link_to 'Show', movie %></td>
             <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
             <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: "Are you sure?" } %></td>
