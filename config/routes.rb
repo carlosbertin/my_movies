@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  root 'movies#index'
+  devise_for :users
+
+  # listando os usuários do devise. NOTE: put this after the 'devise_for :users' line
+  resources :users, only: [:index]
+
   resources :directors
   resources :actors
   resources :movies
+  post 'movies/:id/classifications' => 'movies#create_classification'
   # get '/movies' => 'movies#index'
   # get '/movies/new' => 'movies#new'
   # post '/movies' => 'movies#create'

@@ -1,18 +1,36 @@
-<h1>Movies#show</h1>
-
-<h1><%= @movie.title %></h1>
-
-<table border='1'>
-    <tr>
-        <th>Description</th>
-        <th>Release Date</th>
-        <th>Budget</th>
-        <th>Box Office</th>
-    </tr>
-    <tr>
-        <td><%= @movie.description%></td>
-        <td><%= @movie.release_date%></td>
-        <td><%= @movie.budget%></td>
-        <td><%= @movie.box_office%></td>
-    </tr>
-</table>
+<h1 class="title">
+  <%= @movie.title %>
+</h1>
+ 
+<% if user_signed_in? %>
+  <% classification = @movie.classifications.where(user_id: current_user.id).first %>
+  <% if classification %>
+    <h4>
+      Your Score: <%= classification.score %>
+    </h4>
+  <% else %>
+    <%= form_for Classification.new, url: "/movies/#{@movie.id}/classifications" do |f| %>
+      <div class="field">
+        <%= f.label :score %>
+        <%= f.text_field :score %>
+      </div>
+      <%= submit_tag "Set score", :id => "submit" %>
+    <% end %>
+  <% end %>
+<% end %>
+ 
+ 
+<p>
+  <strong>Release date:</strong>
+  <%= @movie.release_date %>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= @movie.description %>
+</p>
+ 
+<p>
+  <strong>Score:</strong>
+  <%= @movie.average_score %>
+</p>

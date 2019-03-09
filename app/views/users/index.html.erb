@@ -1,0 +1,23 @@
+<h1>Users</h1>
+
+<table border='1'>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Filmes que já assistiu e Score</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.filmes_que_o_user_ja_assistiu %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Movies', movies_path %>
