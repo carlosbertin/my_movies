@@ -11,9 +11,6 @@ class ActorsController < ApplicationController
   # GET /actors/1
   # GET /actors/1.json
   def show
-    movies = Movie.all
-    actor = Actor.find(@actor.id)
-    @movies_actor = actor.movies
   end
 
   # GET /actors/new
@@ -46,6 +43,10 @@ class ActorsController < ApplicationController
   def update
     respond_to do |format|
       if @actor.update(actor_params)
+        if params[:remove_avatar]
+          @actor.remove_avatar!
+          @actor.save
+        end
         format.html { redirect_to @actor, notice: 'Actor was successfully updated.' }
         format.json { render :show, status: :ok, location: @actor }
       else
@@ -73,6 +74,6 @@ class ActorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def actor_params
-      params.require(:actor).permit(:name, :birthdate, :gender, :country, :type)
+      params.require(:actor).permit(:name, :birthdate, :gender, :country, :type, :avatar, :remove_avatar)
     end
 end

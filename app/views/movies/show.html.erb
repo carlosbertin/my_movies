@@ -1,6 +1,12 @@
 <h1 class="title">
   <%= @movie.title %>
 </h1>
+
+<p>
+  <%= image_tag(@movie.avatar_url(:thumb)) if @movie.avatar? %>
+  <%= image_tag(@movie.avatar_url(:medium)) if @movie.avatar? %>
+  <%= image_tag(@movie.avatar_url(:big)) if @movie.avatar? %>
+</p>
  
 <% if user_signed_in? %>
   <% classification = @movie.classifications.where(user_id: current_user.id).first %>
@@ -18,8 +24,7 @@
     <% end %>
   <% end %>
 <% end %>
- 
- 
+  
 <p>
   <strong>Release date:</strong>
   <%= @movie.release_date %>
@@ -31,6 +36,6 @@
 </p>
  
 <p>
-  <strong>Score:</strong>
+  <strong>Avarage Score:</strong>
   <%= @movie.average_score %>
 </p>

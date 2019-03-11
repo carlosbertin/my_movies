@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :create_classification]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :create_classification]
   before_action :authenticate_user!, except: [:index, :show]
  
   def index
@@ -14,6 +14,10 @@ class MoviesController < ApplicationController
  
   def update
     if @movie.update(movie_params)
+      if params[:remove_avatar]
+        @movie.remove_avatar!
+        @movie.save
+      end
       redirect_to action: :show, id: @movie.id
     else
       render :edit, id: @movie.id
@@ -32,6 +36,16 @@ class MoviesController < ApplicationController
       render :new
     end
   end
+
+  # DELETE /movies/1
+  # DELETE /movies/1.json
+  def destroy
+    @movie.destroy
+    respond_to do |format|
+      format.html { redirect_to movies_url, notice: 'movie was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
  
   def create_classification
     classification = Classification.new(classification_params)
@@ -48,7 +62,7 @@ class MoviesController < ApplicationController
   private
  
   def movie_params
-    params.require(:movie).permit(:title, :release_date, :description)
+    params.require(:movie).permit(:title, :release_date, :description, :avatar, :remove_avatar)
   end
  
   def classification_params

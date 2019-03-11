@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Email</th>
-      <th>Filmes que já assistiu e Score</th>
+      <th>Filmes que já assistiu e Score concedido</th>
     </tr>
   </thead>
 
@@ -12,7 +12,15 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.filmes_que_o_user_ja_assistiu %></td>
+        <td>
+        <%
+          user.filmes_que_o_user_ja_assistiu.each do |key, value|
+        %>
+            <li><%= link_to key, movie_path(value) %></li>
+        <%
+          end
+        %>
+        </td>
       </tr>
     <% end %>
   </tbody>

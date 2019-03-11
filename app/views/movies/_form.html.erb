@@ -4,6 +4,16 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :avatar %>
+    <%= image_tag(@movie.avatar_url) if @movie.avatar? %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+    <label>
+      <%= f.check_box :remove_avatar %>
+      Remove avatar
+    </label>
+  </div>
+  <div class="field">
     <%= f.label :release_date %>
     <%= f.date_select :release_date,
           start_year: 1900,

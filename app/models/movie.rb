@@ -10,6 +10,8 @@ class Movie < ApplicationRecord
     has_many :classifications
     has_many :users, through: :classifications
 
+    mount_uploader :avatar, AvatarUploader
+
     def average_score
         classifications.average(:score).to_f
     end

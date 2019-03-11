@@ -6,6 +6,12 @@
 </p>
 
 <p>
+  <%= image_tag(@actor.avatar_url(:thumb)) if @actor.avatar? %>
+  <%= image_tag(@actor.avatar_url(:medium)) if @actor.avatar? %>
+  <%= image_tag(@actor.avatar_url(:big)) if @actor.avatar? %>
+</p>
+
+<p>
   <strong>Birthdate:</strong>
   <%= @actor.birthdate %>
 </p>
@@ -31,7 +37,7 @@
     <tr>
         <th>Title</th>
     </tr>
-    <% @movies_actor.each do |movies_actor| %>
+    <% @actor.movies.each do |movies_actor| %>
         <tr>
             <td><%= movies_actor.title %></td>
         </tr>

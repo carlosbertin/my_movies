@@ -2,10 +2,11 @@
 
 <h1>Directors</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Foto</th>
       <th>Birthdate</th>
       <th>Gender</th>
       <th>Country</th>
@@ -18,6 +19,7 @@
     <% @directors.each do |director| %>
       <tr>
         <td><%= director.name %></td>
+        <td><%= image_tag(director.avatar_url(:thumb)) if director.avatar? %></td>
         <td><%= director.birthdate %></td>
         <td><%= director.gender %></td>
         <td><%= director.country %></td>

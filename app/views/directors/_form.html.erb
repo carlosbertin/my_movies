@@ -17,6 +17,17 @@
   </div>
 
   <div class="field">
+    <%= form.label :foto %>
+    <%= image_tag(director.avatar_url(:medium)) if director.avatar? %>
+    <%= form.file_field :avatar %>
+    <%= form.hidden_field :avatar_cache %>
+    <label>
+      <%= form.check_box :remove_avatar %>
+      Remove avatar
+    </label>
+  </div>
+
+  <div class="field">
     <%= form.label :birthdate %>
     <%= form.datetime_select :birthdate %>
   </div>

@@ -11,7 +11,6 @@ class DirectorsController < ApplicationController
   # GET /directors/1
   # GET /directors/1.json
   def show
-    @movies_director = Movie.where(id: @director.id)
   end
 
   # GET /directors/new
@@ -44,6 +43,10 @@ class DirectorsController < ApplicationController
   def update
     respond_to do |format|
       if @director.update(director_params)
+        if params[:remove_avatar]
+          @actor.remove_avatar!
+          @actor.save
+        end
         format.html { redirect_to @director, notice: 'Director was successfully updated.' }
         format.json { render :show, status: :ok, location: @director }
       else
@@ -71,6 +74,6 @@ class DirectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def director_params
-      params.require(:director).permit(:name, :birthdate, :gender, :country, :type)
+      params.require(:director).permit(:name, :birthdate, :gender, :country, :type, :avatar, :remove_avatar)
     end
 end

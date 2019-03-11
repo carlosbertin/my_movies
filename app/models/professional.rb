@@ -3,5 +3,7 @@ class Professional < ApplicationRecord
     validates :gender, inclusion: { in: ['male', 'female'], 
         message: "%{value} is not valid - expected 'male' or 'female'" }
 
+    mount_uploader :avatar, AvatarUploader
+
     belongs_to :director, class_name: 'Director', foreign_key: 'director_id', optional: true
 end
