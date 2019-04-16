@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # root :to => "movies#index"
+  root 'movies#index'
   devise_for :users
 
   # listando os usuários do devise. NOTE: put this after the 'devise_for :users' line

@@ -1,44 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>MyMovies</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "MyMovies" %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
- 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield(:head) %>
   </head>
- 
   <body>
-    <div class="header">
-      <ul class="menu">
-        <li>
-          <h1 class="app-title">
-            <%= link_to("MyMovies", "/") %>
-          </h1>
-        </li>
-        <li class="menu-item"><%= link_to("Movies", "/movies") %></li>
-        <li class="menu-item"><%= link_to("Actors", "/actors") %></li>
-        <li class="menu-item"><%= link_to("Directors", "/directors") %></li>
-        <% if user_signed_in? %>
-          <li class="menu-item sign-out">
-            <%= link_to("Sign Out", "/users/sign_out", method: :delete) %>
-          </li>
-        <% else %>
-          <li class="menu-item sign-in">
-            <%= link_to("Sign In", "/users/sign_in") %>
-          </li>
-          <li class="menu-item sign-up">
-            <%= link_to("Sign Up", "/users/sign_up") %>
-          </li>
-        <% end %>
-      </ul>
- 
-    </div>
-    <div class="main">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, class: "alert alert-info" %>
-      <% end %>
-      <%= yield %>
-    </div>
+    <header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
+          <%= render 'layouts/navigation' %>
+        </div>
+      </nav>
+    </header>
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+           <div class="row">
+            <div class="span12">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>
+          <footer>
+          </footer>
+        </div>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
   </body>
 </html>
